@@ -5,28 +5,34 @@ import * as validatorsFunc from './../../../validate'
 // components =>
 import TitleHead from "../../../components/TitleHead/TitleHead";
 import Input from "../../../components/Input/Input";
-import {Link} from 'react-router-dom'
+import {Link, useParams} from 'react-router-dom'
 import Swal from "sweetalert2";
 
 // hooks
 import UseInputsDetails from "../../../Hooks/InputsDetails";
-import "./NewQuiz.css";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../../components/Loader/Loader";
 
 export default function NewQuiz() {
-  const [inputsDetails , dispatch] = UseInputsDetails({})
+ 
 
-
+  const params = useParams()
   // dispatch 
   const reduxDispatch = useDispatch()
   // SELECTOR
   const isLoading = useSelector(state => state.loading)
+  const examObj = useSelector(state => (
+    state.exams.find(exam => exam.id === +params.id)
+  ))
+
+  
+
+  const [inputsDetails , dispatch] = UseInputsDetails(examObj)
 
 
 
   // handlers =>
-  const addNewQuizHandler = () => {
+  const editQuizHandler = () => {
     // ------ validation inputs ------ //
     const inputsData = {...inputsDetails}
     const inputResults = {
@@ -52,25 +58,25 @@ export default function NewQuiz() {
     reduxDispatch({
       type : 'API_REQUEST' , 
       payload : {
-        method : 'POST' , 
+        method : 'PUT' , 
         table : 'exams' ,
         body : inputsData ,
-        onSuccessType : 'exams/ADD_EXAM' ,
+        id : params.id ,
+        onSuccessType : 'exams/UPDATE_EXAMS' ,
         onErrorType : ''
       }
     })
    
   } 
-  useEffect(() => {
-    console.log(isLoading)
-  } , [isLoading])
+
+
   return (
     <>
     {isLoading && <Loader />}
       <div className="row">
-        <TitleHead title="تعریف ازمون جدید" />
+        <TitleHead title="ویرایش ازمون" />
         <div className="mt-2 text-muted">
-          برای ایجاد ازمون جدید ، اطلاعات کلی ازمون را وارد کنید! در بخش 
+          برای ویرایش ازمون  ، اطلاعات جدید ازمون را وارد کنید! در بخش 
           {'\u00A0'} <Link to="/p-admin/newQuestion">افزودن سوال</Link>{'\u00A0'}    
           میتوانید به ازمون خود سوال اضافه کنید.
           همچنین در بخش 
@@ -87,7 +93,7 @@ export default function NewQuiz() {
             placeholder="عنوان ازمون را وارد کنید"
             class="form-control"
 
-            defaultValue=""
+            defaultValue={examObj?.title}
             name="title"
             onSaveHandler={dispatch}
           />
@@ -99,7 +105,7 @@ export default function NewQuiz() {
             placeholder="زمان ازمون را وارد کنید ( دقیقه )"
             class="form-control"
 
-            defaultValue=""
+            defaultValue={examObj?.time}
             name="time"
             onSaveHandler={dispatch}
           />
@@ -111,7 +117,7 @@ export default function NewQuiz() {
             placeholder="تاریخ شروع ازمون را وارد کنید. فرمت (dddd/dd/dd)"
             class="form-control"
 
-            defaultValue=""
+            defaultValue={examObj?.startDate}
             name="startDate"
             onSaveHandler={dispatch}
           />
@@ -123,7 +129,7 @@ export default function NewQuiz() {
             placeholder="تاریخ پایان ازمون را وارد کنید. فرمت (dddd/dd/dd)"
             class="form-control"
 
-            defaultValue=""
+            defaultValue={examObj?.endDate}
             name="endDate"
             onSaveHandler={dispatch}
           />
@@ -135,7 +141,7 @@ export default function NewQuiz() {
             placeholder="نام برگزار کننده ازمون"
             class="form-control"
 
-            defaultValue=""
+            defaultValue={examObj?.creator}
             name="creator"
             onSaveHandler={dispatch}
           />
@@ -143,7 +149,7 @@ export default function NewQuiz() {
       </div>
       <div className="row mt-2">
         <div className="text-end">
-          <button className="btn btn-primary" onClick={addNewQuizHandler}>ایجاد ازمون</button>
+          <button className="btn btn-primary" onClick={editQuizHandler}>ثبت تغییرات</button>
         </div>
       </div>
     </>

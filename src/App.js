@@ -2,9 +2,10 @@
 import { useRoutes } from 'react-router-dom';
 import './App.css';
 import routes from './routes';
-import { Provider, useDispatch } from 'react-redux';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 import store from './redux/store'
 import { useEffect } from 'react';
+import Loader from './components/Loader/Loader';
 
 
 function App() {

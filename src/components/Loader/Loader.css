@@ -1,0 +1,13 @@
+.loadingPrant{
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000000a1;
+    color: #fff;
+    z-index: 1;
+}

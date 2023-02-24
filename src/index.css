@@ -33,3 +33,10 @@ ul{
 .form-control:focus{
     box-shadow: none !important;
 }
+tr {
+    text-align: center;
+    vertical-align: middle;
+}
+.bgHeadTable{
+    background : #ccc7c7cf;
+}
