@@ -24,6 +24,28 @@ function App() {
         onErrorType : ''
       } 
     })
+    // init questions
+    store.dispatch({
+      type : 'API_REQUEST' ,
+      payload : {
+        method : 'INIT' ,
+        table : 'questions' ,
+        onSuccessType : 'questions/INIT_QUESTIONS' ,
+        onErrorType : ''
+      } 
+    })
+
+    store.dispatch({
+      type : 'API_REQUEST' ,
+      payload : {
+        method : 'TEST' ,
+        table : 'questions' ,
+        onSuccessType : 'questions/INIT_QUESTIONS' ,
+        onErrorType : ''
+      } 
+    })
+
+
   } , [])
   return (
     <Provider store={store}>

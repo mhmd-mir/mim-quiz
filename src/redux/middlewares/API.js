@@ -82,17 +82,30 @@ const API = (store) => (next) => async (action) => {
 
       const { error } = await supabase.from(table).delete().eq("id", id);
 
-      if(error === null){
+      if (error === null) {
         await store.dispatch({
-          type : onSuccessType ,
-          payload : {
-            id
-          }
-        })
+          type: onSuccessType,
+          payload: {
+            id,
+          },
+        });
 
-      //end loading
-      store.dispatch({ type: "loader/LOADING_OFF" });
+        //end loading
+        store.dispatch({ type: "loader/LOADING_OFF" });
       }
+      break;
+    }
+    case "TEST": {
+      const { data, error } = await supabase
+      .from("exams").select(`
+        *,
+        questions (
+          *
+        )
+    `);
+
+    console.log(data)
+
       break;
     }
     default: {

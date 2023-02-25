@@ -1,6 +1,5 @@
 import {React , useEffect, useState} from "react";
 import TitleHead from "../../../components/TitleHead/TitleHead";
-import "./NewQuestion.css";
 
 // modules
 import * as validatorsFunc from './../../../validate'
@@ -12,7 +11,7 @@ import Loader from "../../../components/Loader/Loader";
 import UseInputsDetails from "../../../Hooks/InputsDetails";
 import { useDispatch, useSelector } from "react-redux";
 
-export default function NewQuestion() {
+export default function EditQuestion() {
   const [inputsDetails, dispatch] = UseInputsDetails({});
     // states =>
     const [examId , setExamId] = useState()
