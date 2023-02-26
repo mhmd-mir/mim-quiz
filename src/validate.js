@@ -19,6 +19,32 @@ export const isDate = (tag , value) => {
     }
 }
 
+export const isEmail = (tag , value) => {
+    return {
+        [tag] : /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value)
+    }
+}
+
+export const isFullArray = (tag , value = []) => {
+    return {
+        [tag] : value.length !== 0
+    }
+}
+
+export const isPassword = (tag , value = '') => {
+    return {
+        [tag] : value.length >= 8
+    }
+}
+
+
+export const isRole = (tag , value) => {
+    return {
+        [tag] : (value === 'ADMIN' || value === 'USER')
+    }
+}
+
+
 
 
 // another functions

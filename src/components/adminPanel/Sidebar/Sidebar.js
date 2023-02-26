@@ -28,6 +28,9 @@ export default function Sidebar() {
             <li className={`${activeRoute === 'questions' ? 'active_bg' : ''}`}>
                 <Link to="questions" onClick={() => setActiveRoute('questions')}>سوال ها</Link>
             </li>
+            <li className={`${activeRoute === 'newUser' ? 'active_bg' : ''}`}>
+                <Link to="newUser" onClick={() => setActiveRoute('newUser')}>کاربر جدید</Link>
+            </li>
             <li className={`${activeRoute === 'users' ? 'active_bg' : ''}`}>
                 <Link to="users" onClick={() => setActiveRoute('users')}>کاربران</Link>
             </li>

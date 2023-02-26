@@ -34,16 +34,27 @@ function App() {
         onErrorType : ''
       } 
     })
-
+    // init users 
     store.dispatch({
-      type : 'API_REQUEST' ,
+      type  : 'API_REQUEST' , 
       payload : {
-        method : 'TEST' ,
-        table : 'questions' ,
-        onSuccessType : 'questions/INIT_QUESTIONS' ,
+        method : 'INIT' ,
+        table : 'users' ,
+        onSuccessType : 'users/INIT_USERS' ,
         onErrorType : ''
-      } 
+      }
     })
+
+    // forien key
+    // store.dispatch({
+    //   type : 'API_REQUEST' ,
+    //   payload : {
+    //     method : 'TEST' ,
+    //     table : 'questions' ,
+    //     onSuccessType : 'questions/INIT_QUESTIONS' ,
+    //     onErrorType : ''
+    //   } 
+    // })
 
 
   } , [])
