@@ -1,0 +1,30 @@
+.authBtn{
+    border: none;
+    margin: 0 7px;
+    padding: 5px 25px;
+    border-radius: 4px;
+    color: #ffffff;
+    box-shadow: 1px 1px 4px #747070a3;
+}
+.bg-register{
+    background-color: #7600ff ;
+}
+.bg-login{
+    background-color: #723131;
+}
+.mt-100{
+    margin-top: 100px;
+}
+.mb-200{
+    margin-bottom: 200px;
+}
+.copyRight{
+    text-align: center;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    background: #e4e4e4b3;
+}
+.indexPr{
+    background: #eaeaeac2;
+}

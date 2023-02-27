@@ -1,3 +1,8 @@
+// root 
+import Index from './pages/Index/Index' ;
+
+
+
 
 // admin panel pages
 import AdminIndex from './pages/adminPanel/AdminIndex'
@@ -13,6 +18,10 @@ import Users from './pages/adminPanel/Users/Users'
 import EditUser from './pages/adminPanel/EditUser/EditUser'
 
 const routes = [
+    {
+        path : '/' , 
+        element : <Index />
+    } ,
     { 
         path : '/p-admin' ,
         element : <AdminIndex /> ,
@@ -30,6 +39,8 @@ const routes = [
             { path : 'newUser' , element : <NewUser />  } ,
             { path : 'editUser/:id' , element : <EditUser /> } ,
             { path : 'users'  , element : <Users />} ,
+
+
         ]
     } ,
 ]
