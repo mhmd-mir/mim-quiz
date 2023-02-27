@@ -14,6 +14,10 @@ export const usersSlice = createSlice({
                 action.payload.data
             ]
         } ,
+        "UPDATE_USER" : (state , action) => {
+            const index = state.findIndex(user => user.id === +action.payload.id)
+            state[index] = action.payload.data
+        } , 
         "DELETE_USER" : (state , action) => {
             const filteredState = state.filter(user => user.id !== +action.payload.id)
             return filteredState

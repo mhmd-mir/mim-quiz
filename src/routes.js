@@ -10,7 +10,7 @@ import Questions from './pages/adminPanel/Questions/Questions'
 import EditQuestion from './pages/adminPanel/EditQuestion/EditQuestion'
 import NewUser from './pages/adminPanel/NewUser/NewUser'
 import Users from './pages/adminPanel/Users/Users'
-
+import EditUser from './pages/adminPanel/EditUser/EditUser'
 
 const routes = [
     { 
@@ -28,7 +28,7 @@ const routes = [
             { path : 'questions' , element : <Questions /> } ,
 
             { path : 'newUser' , element : <NewUser />  } ,
-            { path : 'editUser/:id' } ,
+            { path : 'editUser/:id' , element : <EditUser /> } ,
             { path : 'users'  , element : <Users />} ,
         ]
     } ,
