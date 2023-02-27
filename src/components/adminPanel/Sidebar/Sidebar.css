@@ -2,7 +2,7 @@
     height: 100vh;
     background: #0c0f3a ;
     padding: 2rem 1rem;
-
+    min-height: 100%;
 }
 .adminSidebar ul li{
     padding: 5px 8px;
