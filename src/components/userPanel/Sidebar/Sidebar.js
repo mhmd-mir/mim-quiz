@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import './Sidebar.css'
 
-export default function Sidebar() {
+export default function Sidebar({userInfo}) {
     const [activeRoute , setActiveRoute] = useState('')
 
 
@@ -14,8 +14,8 @@ export default function Sidebar() {
     <div className='adminSidebar'>
         <div className='user-Info mb-4 text-center'>
             <img src="images/userProfile.jpg" alt="" width={100} className="rounded-circle" />
-            <div className='mt-2 text-white'>userEm@gmail.com</div>
-            <div className='mt-1 text-white'>username</div>
+            <div className='mt-2 text-white'>{userInfo?.email}</div>
+            <div className='mt-1 text-white'>{userInfo?.username}</div>
         </div>
         <ul>
             <li className={`${activeRoute === '' ? 'active_bg' : ''}`}>

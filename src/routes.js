@@ -1,7 +1,7 @@
 // root 
 import Index from './pages/Index/Index' ;
 import Register from './pages/Register/Register'
-
+import Login from './pages/Login/Login'
 
 
 // admin panel pages
@@ -31,6 +31,10 @@ const routes = [
     {
         path : '/register' , 
         element : <Register />
+    },
+    {
+        path : '/login' , 
+        element : <Login />
     },
     { 
         path : '/p-admin' ,
