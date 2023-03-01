@@ -6,7 +6,7 @@ const API = (store) => (next) => async (action) => {
     return;
   }
 
-  const { table, method, body, onSuccessType, onErrorType, id } =
+  const { table, method, body, onSuccessType, onErrorType, id , onSuccessCallback } =
     action.payload;
 
   switch (method) {
@@ -38,6 +38,7 @@ const API = (store) => (next) => async (action) => {
       const { data, error } = await supabase.from(table).insert(body).select();
 
       if (data) {
+        onSuccessCallback(data[0].id)
         // success type dispatch =>
         await store.dispatch({
           type: onSuccessType,
@@ -45,6 +46,7 @@ const API = (store) => (next) => async (action) => {
             data: data[0],
           },
         });
+      
         //end loading
         store.dispatch({ type: "loader/LOADING_OFF" });
       }
@@ -89,8 +91,7 @@ const API = (store) => (next) => async (action) => {
             id,
           },
         });
-
-        //end loading
+        
         store.dispatch({ type: "loader/LOADING_OFF" });
       }
       break;

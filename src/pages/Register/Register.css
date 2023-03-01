@@ -1,0 +1,49 @@
+.register{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #6d9ac4;
+}
+.registerBtn{
+    border: none;
+    padding: 5px 20px;
+    width: 100%;
+    border-radius: 4px;
+    background: #ff5875;
+    color: #f9f9f9f7;
+    box-shadow: 1px 1px 6px #b8b8b8e0;
+}
+.register_form{
+    max-width: 350px;
+    width: 350px;
+}
+.registerIcons{
+    font-size: 30px;
+    padding: 2px;
+    margin: 0 5px;
+}
+
+
+.fillRed{
+    fill: red;
+}
+.fillBlue{
+    fill: blue;
+}
+.fillPurple{
+    fill: purple;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
