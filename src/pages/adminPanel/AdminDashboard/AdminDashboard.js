@@ -7,6 +7,7 @@ import { MdQuiz } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { RiAdminFill } from "react-icons/ri";
 import { useSelector } from "react-redux";
+import Loader from "../../../components/Loader/Loader";
 
 export default function AdminDashboard() {
   // selectors =>
@@ -15,6 +16,7 @@ export default function AdminDashboard() {
   const adminCount = useSelector(
     (state) => state.users.filter((user) => user.role === "ADMIN").length
   );
+  const isLoading = useSelector(state => state.loading)
   const lastExams = useSelector((state) =>
     state.exams.filter((exam, index) => index < 5 && exam)
   );
@@ -23,6 +25,9 @@ export default function AdminDashboard() {
 );
   return (
     <>
+      
+      { isLoading && <Loader /> }
+
       <div className="col-md-4 my-2">
         <DashboardBox
           count={examsCount}
@@ -31,6 +36,7 @@ export default function AdminDashboard() {
           icon={<MdQuiz className="dashboradBoxIcon" />}
         />
       </div>
+
       <div className="col-md-4 my-2">
         <DashboardBox
           count={usersCount}
@@ -39,6 +45,7 @@ export default function AdminDashboard() {
           icon={<FaUser className="dashboradBoxIcon" />}
         />
       </div>
+
       <div className="col-md-4 my-2">
         <DashboardBox
           count={adminCount}
@@ -113,6 +120,7 @@ export default function AdminDashboard() {
           </div>
         </div>
       </div>
+      
     </>
   );
 }

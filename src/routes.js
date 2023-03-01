@@ -17,6 +17,12 @@ import NewUser from './pages/adminPanel/NewUser/NewUser'
 import Users from './pages/adminPanel/Users/Users'
 import EditUser from './pages/adminPanel/EditUser/EditUser'
 
+
+// user panel pages
+import UserIndex from './pages/userPanel/UserIndex'
+import UserDashboard from './pages/userPanel/UserDashboard/UserDashboard'
+import UserExams from './pages/userPanel/UserExams/UserExams'
+
 const routes = [
     {
         path : '/' , 
@@ -43,6 +49,14 @@ const routes = [
 
         ]
     } ,
+    {
+        path : '/my-account' , 
+        element : <UserIndex /> ,
+        children : [
+            { path : '' , element : <UserDashboard /> },
+            { path : 'exams' , element : <UserExams /> }
+        ]
+    }
 ]
 
 export default routes ;
