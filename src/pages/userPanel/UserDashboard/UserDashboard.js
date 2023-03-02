@@ -6,13 +6,19 @@ import { ImWarning } from "react-icons/im";
 import { IoMdPaper } from "react-icons/io";
 import { MdQuiz } from "react-icons/md";
 import TitleHead from "../../../components/TitleHead/TitleHead";
+import { useSelector } from "react-redux";
 export default function UserDashboard() {
+  // selectors =>
+  const userInfo = useSelector((state) =>
+    state.users.find((user) => user.id === +localStorage.getItem("userId"))
+  );
+
   return (
     <>
       <div className="row">
         <div className="col-md-4">
           <DashboardBox
-            count="10"
+            count={userInfo?.activeExams?.length}
             title="ازمون"
             bg="primary"
             icon={<MdQuiz className="dashboradBoxIcon" />}
@@ -20,7 +26,7 @@ export default function UserDashboard() {
         </div>
         <div className="col-md-4">
           <DashboardBox
-            count="7"
+            count="2"
             title="کارنامه"
             bg="warning"
             icon={<IoMdPaper className="dashboradBoxIcon" />}

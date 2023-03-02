@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import './Sidebar.css'
-
+import Swal from 'sweetalert2'
 export default function Sidebar() {
     const [activeRoute , setActiveRoute] = useState('')
 
@@ -10,6 +10,26 @@ export default function Sidebar() {
         const currentRoute = window.location.href.slice(30)
         setActiveRoute(currentRoute)
     } , [])
+
+    const navigate = useNavigate()
+
+    // handlers => 
+    // handlers => 
+    const logOutHandler = () => {
+        Swal.fire({
+            title : 'خروج از حساب کاربری' ,
+            title : 'از حساب کاربری خارج می شوید؟' ,
+            icon : 'warning' ,
+            showCancelButton : true ,
+            confirmButtonText : 'بله' ,
+            cancelButtonText : 'خیر' 
+        }).then(res => {
+            if(res.isConfirmed){
+                localStorage.removeItem("userId")
+                navigate('/')
+            }
+        })
+    }
   return (
     <div className='adminSidebar'>
         <ul>
@@ -40,7 +60,7 @@ export default function Sidebar() {
             <li className={`${activeRoute === 'settings' ? 'active_bg' : ''}`}>
                 <Link to="settings" onClick={() => setActiveRoute('settings')}>تنظمیات</Link>
             </li>
-            <li >
+            <li onClick={logOutHandler}>
                 <Link to="">خروج</Link>
             </li>
         </ul>

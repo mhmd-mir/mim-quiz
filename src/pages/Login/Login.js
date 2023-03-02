@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Input from "../../components/Input/Input";
 import UseInputsDetails from "../../Hooks/InputsDetails";
 import Swal from "sweetalert2";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 // modules
 import * as validatorsFunc from "./../../validate";
 // icons =>
@@ -53,7 +53,7 @@ export default function Login() {
 
     if (user?.id) {
       localStorage.setItem("userId", user?.id);
-      user.role === 'USER' ? navigate('/my-account') : navigate('/p-admin')
+      user.role === "USER" ? navigate("/my-account") : navigate("/p-admin");
     } else {
       Swal.fire({
         title: "کاربر یافت نشد",
@@ -62,6 +62,16 @@ export default function Login() {
       });
     }
   };
+
+  useEffect(() => {
+    const currentUserId = localStorage.getItem("userId");
+
+    if (currentUserId) {
+      const userInfo = users.find((user) => user.id === +currentUserId);
+
+      (userInfo.role === 'ADMIN') ? navigate('/p-admin') : navigate('/my-account') 
+    }
+  }, [users]);
   return (
     <>
       {isLoading && <Loader />}
