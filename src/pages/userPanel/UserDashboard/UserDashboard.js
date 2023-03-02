@@ -48,7 +48,7 @@ export default function UserDashboard() {
           />
         </div>
       </div>
-      <div className="row mt-5">
+      <div className="row mt-5 justify-content-center">
         <TitleHead title=" ازمون های اخیر " />
         <div className="row mt-5 rtl">
           {userInfo?.activeExams?.slice(0, 3).map((exam) => (

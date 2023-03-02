@@ -40,3 +40,12 @@ tr {
 .bgHeadTable{
     background : #ccc7c7cf;
 }
+
+@media screen and (max-width : 992px) {
+    .adminSidebar{
+        height: auto !important;
+    }
+}
+tr{
+    white-space: nowrap;
+}
