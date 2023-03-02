@@ -1,0 +1,31 @@
+.examBox{
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px #a19f9fc9;
+}
+.examBoxHead{
+    display: flex;
+    align-items: center;
+    background: #5f508c;
+    color: #fff;
+    border-radius: 10px 10px 0 0;
+}
+.examBoxTitle{
+    font-size: 20px;
+
+}
+.examBoxProps{
+    padding: 20px 10px;
+}
+.examProp_value{
+    margin-top: 3px;
+    font-weight: 600;
+}
+.startExamBtn{
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background: #5f508c;
+    color: #fff;
+    font-weight: 600;
+    box-shadow: 1px 1px 4px #696969de;
+}

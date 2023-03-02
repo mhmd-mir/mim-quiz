@@ -8,6 +8,10 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
+
+
+// import 
+import {FaUserAlt} from 'react-icons/fa'
 export default function UserIndex() {
   const [showSidebar, setShowSidebar] = useState(true);
   // SELECTORS
@@ -39,7 +43,7 @@ export default function UserIndex() {
                   <GiHamburgerMenu className="hambergerMenu" onClick={() => setShowSidebar(prev => !prev)}/>
                 </div>
                 <div>
-                  <span className="h5 mx-3">{userInfo?.username}</span>
+                  <span className="h5 mx-3">{userInfo?.username}<FaUserAlt className="mx-2" style={{marginTop : ' -5px'}}/> </span>
                 </div>
               </div>
             </div>

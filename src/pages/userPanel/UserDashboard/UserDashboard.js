@@ -1,6 +1,7 @@
 import React from "react";
 import DashboardBox from "../../../components/adminPanel/DashboardBox/DashboardBox";
-
+import { convertToFastStructure } from "../../../utils";
+import ExamBox from "../../../components/userPanel/ExamBox/ExamBox";
 // icons =>
 import { ImWarning } from "react-icons/im";
 import { IoMdPaper } from "react-icons/io";
@@ -9,6 +10,10 @@ import TitleHead from "../../../components/TitleHead/TitleHead";
 import { useSelector } from "react-redux";
 export default function UserDashboard() {
   // selectors =>
+  // selectors =>
+  const exams = useSelector((state) => state.exams);
+  const examsObj = convertToFastStructure(exams);
+
   const userInfo = useSelector((state) =>
     state.users.find((user) => user.id === +localStorage.getItem("userId"))
   );
@@ -42,7 +47,14 @@ export default function UserDashboard() {
         </div>
       </div>
       <div className="row mt-5">
-        <TitleHead title="لیست ازمون های فعال" />
+        <TitleHead title=" ازمون های اخیر " />
+        <div className="row mt-5 rtl">
+          {userInfo?.activeExams?.slice(0, 3).map((exam) => (
+            <div className="col-md-4">
+              <ExamBox {...examsObj[exam.value]} />
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );
