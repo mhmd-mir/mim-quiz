@@ -8,18 +8,20 @@ import { IoMdPaper } from "react-icons/io";
 import { MdQuiz } from "react-icons/md";
 import TitleHead from "../../../components/TitleHead/TitleHead";
 import { useSelector } from "react-redux";
+import Loader from "../../../components/Loader/Loader";
 export default function UserDashboard() {
   // selectors =>
   // selectors =>
   const exams = useSelector((state) => state.exams);
   const examsObj = convertToFastStructure(exams);
-
+  const isLoading = useSelector(state => state.loading )
   const userInfo = useSelector((state) =>
     state.users.find((user) => user.id === +localStorage.getItem("userId"))
   );
 
   return (
     <>
+     {isLoading && <Loader />}
       <div className="row">
         <div className="col-md-4">
           <DashboardBox

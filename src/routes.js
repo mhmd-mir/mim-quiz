@@ -22,6 +22,7 @@ import EditUser from './pages/adminPanel/EditUser/EditUser'
 import UserIndex from './pages/userPanel/UserIndex'
 import UserDashboard from './pages/userPanel/UserDashboard/UserDashboard'
 import UserExams from './pages/userPanel/UserExams/UserExams'
+import UserAccountInfo from './pages/userPanel/UserAccountInfo/UserAccountInfo'
 
 const routes = [
     {
@@ -62,7 +63,8 @@ const routes = [
         element : <UserIndex /> ,
         children : [
             { path : '' , element : <UserDashboard /> },
-            { path : 'exams' , element : <UserExams /> }
+            { path : 'exams' , element : <UserExams /> },
+            { path : 'account-info' , element : <UserAccountInfo /> },
         ]
     }
 ]

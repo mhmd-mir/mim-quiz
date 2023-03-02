@@ -49,7 +49,7 @@ export default function Sidebar({userInfo}) {
                 <Link to="logs" onClick={() => setActiveRoute('logs')}>کارنامه ها</Link>
             </li>
             <li className={`${activeRoute === 'account-info' ? 'active_bg' : ''}`}>
-                <Link to="account-info" onClick={() => setActiveRoute('account-info')}>آطلاعات حساب</Link>
+                <Link to="account-info" onClick={() => setActiveRoute('account-info')}>اطلاعات حساب</Link>
             </li>
             <li onClick={logOutHandler}>
                 <Link to="">خروج</Link>
