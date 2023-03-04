@@ -2,7 +2,7 @@
 import Index from './pages/Index/Index' ;
 import Register from './pages/Register/Register'
 import Login from './pages/Login/Login'
-
+import ExamPage from './pages/ExamPage/ExamPage'
 
 // admin panel pages
 import AdminIndex from './pages/adminPanel/AdminIndex'
@@ -36,6 +36,10 @@ const routes = [
     {
         path : '/login' , 
         element : <Login />
+    },
+    {
+        path : '/exam/:examId/:userId' , 
+        element : <ExamPage />
     },
     { 
         path : '/p-admin' ,

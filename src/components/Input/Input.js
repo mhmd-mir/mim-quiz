@@ -25,6 +25,8 @@ export default function Input(props) {
         placeholder={props.placeholder}
         className={props.class}
 
+        data-value={props.dataValue}
+        name={props.type === 'radio' ? props.name : null}
         value={inputValue}
         onChange={inputChangeHandler}
       />
