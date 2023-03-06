@@ -69,7 +69,7 @@ export default function Login() {
     if (currentUserId) {
       const userInfo = users.find((user) => user.id === +currentUserId);
 
-      (userInfo.role === 'ADMIN') ? navigate('/p-admin') : navigate('/my-account') 
+      (userInfo?.role === 'ADMIN') ? navigate('/p-admin') : navigate('/my-account') 
     }
   }, [users]);
   return (

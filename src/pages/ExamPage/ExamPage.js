@@ -5,12 +5,22 @@ import "./ExamPage.css";
 import Input from "../../components/Input/Input";
 import UseInputsDetails from "../../Hooks/InputsDetails";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 export default function ExamPage() {
   const [inputsDetails, dispatch] = UseInputsDetails({});
   // states =>
   const [questions, setQuestions] = useState([]);
   // parameters
   const params = useParams();
+
+  // Selectors =>
+  const userInfo = useSelector((state) =>
+    state.users.find((user) => user.id === +params.userId)
+  );
+
+  const examInfo = useSelector((state) =>
+    state.exams.find((exam) => exam.id === +params.examId)
+  );
 
   // useEffect =>
   useEffect(() => {
@@ -36,6 +46,7 @@ export default function ExamPage() {
     <>
       <div className="container-fluid py-3">
         <div className="row">
+          {/* // userInfo */}
           <div className="col-md-3 mt-2">
             <div className="userInfo">
               <img
@@ -43,23 +54,24 @@ export default function ExamPage() {
                 width={50}
                 className="rounded-circle shadow my-2"
               />
-              <div className="text-muted">mohammad@gmail.com</div>
-              <div>mohammad</div>
+              <div className="text-muted">{userInfo?.email}</div>
+              <div>{userInfo?.username}</div>
             </div>
           </div>
+          {/* // examInfo */}
           <div className="col-md-9 mt-2">
             <div className="examInfo">
               <div className="row">
                 <div className="col-md-6 mt-2 d-flex justify-content-center">
-                  <div className="bold rtl">ازمون گسسته 1</div>
+                  <div className="bold rtl">{examInfo?.title}</div>
                   <div className="bold text-muted mx-2">: عنوان ازمون</div>
                 </div>
                 <div className="col-md-6 mt-2 d-flex justify-content-center">
-                  <div className="bold rtl">60 دقیقه</div>
+                  <div className="bold rtl">{examInfo?.time} دقیقه</div>
                   <div className="bold text-muted mx-2">: زمان ازمون</div>
                 </div>
                 <div className="col-md-6 mt-2 d-flex justify-content-center">
-                  <div className="bold rtl">اقای دهنوی</div>
+                  <div className="bold rtl">{examInfo?.creator}</div>
                   <div className="bold text-muted mx-2">
                     : تعریف کننده ازمون
                   </div>

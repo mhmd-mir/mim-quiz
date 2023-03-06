@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-
+import { Link } from 'react-router-dom'
 import './ExamBox.css'
 
 
@@ -7,6 +7,7 @@ import './ExamBox.css'
 import {FcCancel} from 'react-icons/fc'
 export default function ExamBox({id , title , startDate , endDate , time , creator}) {
 
+    const userId = localStorage.getItem('userId')
 
   return (
     <div className='examBox mt-3'>
@@ -56,7 +57,7 @@ export default function ExamBox({id , title , startDate , endDate , time , creat
             </div>
         </div>
         <div className='py-3 px-2'>
-            <button className='w-100 startExamBtn'>شرکت در ازمون</button>
+            <Link to={`/exam/${id}/${userId}`} className='w-100 startExamBtn text-white d-flex justify-content-center'>شرکت در ازمون</Link>
         </div>
     </div>
   )

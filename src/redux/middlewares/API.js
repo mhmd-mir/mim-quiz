@@ -6,7 +6,7 @@ const API = (store) => (next) => async (action) => {
     return;
   }
 
-  const { table, method, body, onSuccessType, onErrorType, id , onSuccessCallback } =
+  const { table, method, body, onSuccessType, onErrorType, id , onSuccessCallback = () => {} } =
     action.payload;
 
   switch (method) {
