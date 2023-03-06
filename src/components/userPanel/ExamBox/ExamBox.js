@@ -7,7 +7,6 @@ import './ExamBox.css'
 import {FcCancel} from 'react-icons/fc'
 export default function ExamBox({id , title , startDate , endDate , time , creator}) {
 
-    const userId = localStorage.getItem('userId')
 
   return (
     <div className='examBox mt-3'>
@@ -57,7 +56,7 @@ export default function ExamBox({id , title , startDate , endDate , time , creat
             </div>
         </div>
         <div className='py-3 px-2'>
-            <Link to={`/exam/${id}/${userId}`} className='w-100 startExamBtn text-white d-flex justify-content-center'>شرکت در ازمون</Link>
+            <Link to={`/exam/${id}`} className='w-100 startExamBtn text-white d-flex justify-content-center'>شرکت در ازمون</Link>
         </div>
     </div>
   )

@@ -38,7 +38,7 @@ const routes = [
         element : <Login />
     },
     {
-        path : '/exam/:examId/:userId' , 
+        path : '/exam/:examId' , 
         element : <ExamPage />
     },
     { 
