@@ -44,7 +44,16 @@ function App() {
         onErrorType : ''
       }
     })
-
+  // init logs 
+  store.dispatch({
+    type  : 'API_REQUEST' , 
+    payload : {
+      method : 'INIT' ,
+      table : 'logs' ,
+      onSuccessType : 'logs/INIT_LOGS' ,
+      onErrorType : ''
+    }
+  })
     // forien key
     // store.dispatch({
     //   type : 'API_REQUEST' ,

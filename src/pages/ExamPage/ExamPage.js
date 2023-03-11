@@ -5,25 +5,30 @@ import "./ExamPage.css";
 import Input from "../../components/Input/Input";
 import UseInputsDetails from "../../Hooks/InputsDetails";
 import { useNavigate, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import Timer from "../../components/Timer/Timer";
+import Swal from "sweetalert2";
 export default function ExamPage() {
   const [inputsDetails, dispatch] = UseInputsDetails({});
   // states =>
   const [questions, setQuestions] = useState([]);
   // parameters
   const params = useParams();
-  // redirect 
-  const navigate = useNavigate()
+  // redirect
+  const navigate = useNavigate();
   // Selectors =>
+ 
   const userInfo = useSelector((state) =>
-    state.users.find((user) => user.id === +localStorage.getItem('userId'))
+    state.users.find((user) => user.id === +localStorage.getItem("userId"))
   );
-
-
   const examInfo = useSelector((state) =>
     state.exams.find((exam) => exam.id === +params.examId)
   );
-
+  const log = useSelector(state => state.logs.find(log => {
+    return log.examId === +params.examId && log.userId === userInfo.id
+  }))
+  // dispatch 
+  const reduxDispatch = useDispatch()
   // useEffect =>
   useEffect(() => {
     (async function () {
@@ -42,23 +47,66 @@ export default function ExamPage() {
     })();
   }, []);
   useEffect(() => {
-    const userId = localStorage.getItem('userId')
-    if(userId){
-      const autorization = userInfo?.activeExams.some(examObj => {
-        return examObj.value === +params.examId
-      }) ?? null
-      if(autorization !== null){
-        if(!autorization){
-          navigate('/')
+    const userId = localStorage.getItem("userId");
+    if (userId) {
+      const autorization =
+        userInfo?.activeExams.some((examObj) => {
+          return examObj.value === +params.examId;
+        }) ?? null;
+      if (autorization !== null) {
+        if (!autorization) {
+          navigate("/");
         }
       }
-    }else{
-      navigate('/login')
+    } else {
+      navigate("/login");
     }
-  } , [userInfo])
+  }, [userInfo]);
+  useEffect(() => {
+    if(log){
+      Swal.fire({
+        title : 'عدم دسترسی به ازمون' ,
+        icon : 'error' , 
+        text : 'شما قبلا در این ازمون شرکت کرده اید'
+      }).then(() => {
+        navigate('/my-account')
+      })
+    }
+  } , [log])
+  // methods => 
+  const exportAnswers = (questions) => {
+    const answers = {} 
+    questions.forEach(question => {
+      answers[question.id] = question.answer
+    })
+    return answers
+  }
+
+
   // handlers =>
 
-  const finishExam = () => {};
+  const finishExamHandler = () => {
+    const examLog = {
+      title : examInfo?.title ,
+      userId : userInfo.id , 
+      examId : examInfo.id , 
+      userAnswers : inputsDetails , 
+      examAnswers : exportAnswers(questions)
+    }
+    
+    reduxDispatch({
+      type : 'API_REQUEST' , 
+      payload : {
+        method : 'POST' , 
+        table : 'logs' , 
+        body : examLog ,
+        onSuccessType : 'logs/ADD_LOG' ,
+        onSuccessCallback : () => {
+          navigate('/my-account')
+        }
+      }
+    })
+  };
 
   return (
     <>
@@ -75,7 +123,14 @@ export default function ExamPage() {
               <div className="text-muted">{userInfo?.email}</div>
               <div>{userInfo?.username}</div>
             </div>
-            <button className="btn btn-success mt-2 w-100" onClick={finishExam}>
+            {/* // timer */}
+            <div>
+              <Timer
+                expiryTimestamp={new Date().setSeconds(examInfo?.time * 60)}
+                onExpireHandler={() => finishExamHandler}
+              />
+            </div>
+            <button className="btn btn-success mt-2 w-100" onClick={finishExamHandler}>
               اتمام ازمون
             </button>
           </div>
@@ -109,46 +164,46 @@ export default function ExamPage() {
       {/* // questions  */}
       <div className="container mt-5">
         <div className="row">
-          {questions
-            ? (
-              questions.length ? (
-                questions?.map((question, index) => (
-                  <>
-                    <div className="question rtl my-3">
-                      <div>
-                        <div className="questionIndex">{index + 1}</div>
+          {questions ? (
+            questions.length ? (
+              questions?.map((question, index) => (
+                <>
+                  <div className="question rtl my-3">
+                    <div>
+                      <div className="questionIndex">{index + 1}</div>
+                    </div>
+                    <div>
+                      <div className="row">
+                        <div className="question_fa">{question.title}</div>
                       </div>
-                      <div>
-                        <div className="row">
-                          <div className="question_fa">{question.title}</div>
-                        </div>
-                        <div className="row">
-                          <div className="question_op mt-2">
-                            {question?.options?.map((option) => (
-                              <div className="mx-2 d-flex ">
-                                <Input
-                                  type="radio"
-                                  name={question.id}
-                                  defaultValue={option.id}
-                                  onSaveHandler={dispatch}
-                                />
-                                <span className="mx-1">{option.title}</span>
-                              </div>
-                            ))}
-                          </div>
+                      <div className="row">
+                        <div className="question_op mt-2">
+                          {question?.options?.map((option) => (
+                            <div className="mx-2 d-flex ">
+                              <Input
+                                type="radio"
+                                name={question.id}
+                                defaultValue={option.id}
+                                onSaveHandler={dispatch}
+                              />
+                              <span className="mx-1">{option.title}</span>
+                            </div>
+                          ))}
                         </div>
                       </div>
                     </div>
-                    <hr />
-                  </>
-                ))
-              ) : (
-                 <div className="alert alert-warning rtl">هیچ سوالی برای این ازمون تعریف نشده</div>
-              )
+                  </div>
+                  <hr />
+                </>
+              ))
+            ) : (
+              <div className="alert alert-warning rtl">
+                هیچ سوالی برای این ازمون تعریف نشده
+              </div>
             )
-            : (
-              <div className="alert alert-warning rtl">ازمون وجود ندارد...</div>
-            )}
+          ) : (
+            <div className="alert alert-warning rtl">ازمون وجود ندارد...</div>
+          )}
         </div>
       </div>
     </>

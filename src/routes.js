@@ -23,6 +23,8 @@ import UserIndex from './pages/userPanel/UserIndex'
 import UserDashboard from './pages/userPanel/UserDashboard/UserDashboard'
 import UserExams from './pages/userPanel/UserExams/UserExams'
 import UserAccountInfo from './pages/userPanel/UserAccountInfo/UserAccountInfo'
+import UserLogs from './pages/userPanel/userLogs/UserLogs'
+import LogPage from './pages/userPanel/LogPage/LogPage';
 
 const routes = [
     {
@@ -68,6 +70,8 @@ const routes = [
         children : [
             { path : '' , element : <UserDashboard /> },
             { path : 'exams' , element : <UserExams /> },
+            { path : 'logs' , element : <UserLogs /> },
+            { path : 'logPage/:logId' , element : <LogPage /> },
             { path : 'account-info' , element : <UserAccountInfo /> },
         ]
     }

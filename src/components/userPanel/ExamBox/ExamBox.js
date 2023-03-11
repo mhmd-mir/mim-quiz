@@ -6,6 +6,7 @@ import moment from "moment-jalaali";
 // icons =>
 import { FcCancel } from "react-icons/fc";
 import Swal from "sweetalert2";
+import { useSelector } from "react-redux";
 export default function ExamBox({
   id,
   title,
@@ -14,8 +15,8 @@ export default function ExamBox({
   time,
   creator,
 }) {
-    // redirect => 
-    const navigate = useNavigate()
+  // redirect =>
+  const navigate = useNavigate();
   // methods =>
   const validateExamPeriod = (startDate, endDate) => {
     // convert to globalDate =>
@@ -29,10 +30,9 @@ export default function ExamBox({
     if (currentTime < startTime) {
       return {
         access: false,
-        text: "ازمون هنوز شروع نشده"
+        text: "ازمون هنوز شروع نشده",
       };
-    } 
-    else {
+    } else {
       if (currentTime > endTime) {
         return {
           access: false,
@@ -41,11 +41,9 @@ export default function ExamBox({
       }
       return {
         access: true,
-        text : 'درحال ورود به ازمون'
+        text: "درحال ورود به ازمون",
       };
     }
-
-    
   };
   // handlers =>
   const startExamHandler = () => {
@@ -80,16 +78,17 @@ export default function ExamBox({
         //   validateExamPeriod("1401/12/16", "1401/12/20"),
         //   "\n"
         // );
-        const deadLineInfo = validateExamPeriod(startDate , endDate)
-        if(deadLineInfo?.access){
-            navigate(`/exam/${id}`)
+        const deadLineInfo = validateExamPeriod(startDate, endDate);
+        if (deadLineInfo?.access) {
+          navigate(`/exam/${id}`);
+        } else {
+          Swal.fire({
+            title: "عدم دسترسی به ازمون",
+            icon: "error",
+            text: deadLineInfo.text,
+          });
         }
-        Swal.fire({
-            title : 'عدم دسترسی به ازمون' , 
-            icon : 'error' , 
-            text : deadLineInfo.text
-        })
-    }
+      }
     });
   };
   return (

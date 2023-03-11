@@ -1,0 +1,14 @@
+.timerBox{
+    padding: 10px 0;
+    text-align: center;
+    margin: 10px 0 0 0;
+    box-shadow: 1px 1px 6px #b3b3b3;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.timerBox span{
+    font-size: 1.4rem;
+    font-weight: bold;
+}
