@@ -91,7 +91,8 @@ export default function ExamPage() {
       userId : userInfo.id , 
       examId : examInfo.id , 
       userAnswers : inputsDetails , 
-      examAnswers : exportAnswers(questions)
+      examAnswers : exportAnswers(questions) ,
+      questions
     }
     
     reduxDispatch({
