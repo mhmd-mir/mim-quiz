@@ -1,58 +1,64 @@
 /* // font face */
 @font-face {
-    font-family: vazir;
-    src: url('./../node_modules/vazirmatn/fonts/ttf/Vazirmatn-Regular.ttf');
+  font-family: vazir;
+  src: url("./../node_modules/vazirmatn/fonts/ttf/Vazirmatn-Regular.ttf");
 }
 * {
-    font-family: vazir;
+  font-family: vazir;
 }
-a{
-    color: #000000f0 !important;
-    text-decoration: none;
+a {
+  color: #000000f0 !important;
+  text-decoration: none;
 }
-a:hover{
-    color: #000000f0;
+a:hover {
+  color: #000000f0;
 }
-.rtl{
-    direction: rtl;
+.rtl {
+  direction: rtl;
 }
-.ltr{
-    direction: ltr;
+.ltr {
+  direction: ltr;
 }
-.bold{
-    font-weight: bold;
+.bold {
+  font-weight: bold;
 }
-a{
-    text-decoration: none !important;
+a {
+  text-decoration: none !important;
 }
-ul{
-    list-style-type: none;
-    padding: 0 !important;
+ul {
+  list-style-type: none;
+  padding: 0 !important;
 }
-.hambergerMenu{
-    font-size: 2rem;
-    cursor: pointer;
-    fill: #010531;
+.hambergerMenu {
+  font-size: 2rem;
+  cursor: pointer;
+  fill: #010531;
 }
-.larger{
-    font-size: 1.5rem;
+.larger {
+  font-size: 1.5rem;
 }
-.form-control:focus{
-    box-shadow: none !important;
+.form-control:focus {
+  box-shadow: none !important;
 }
 tr {
-    text-align: center;
-    vertical-align: middle;
+  text-align: center;
+  vertical-align: middle;
 }
-.bgHeadTable{
-    background : #ccc7c7cf;
+.bgHeadTable {
+  background: #ccc7c7cf;
 }
 
-@media screen and (max-width : 992px) {
-    .adminSidebar{
-        height: auto !important;
-    }
+@media screen and (max-width: 992px) {
+  .adminSidebar {
+    height: auto !important;
+  }
 }
-tr{
-    white-space: nowrap;
+tr {
+  white-space: nowrap;
+}
+.searchInput{
+  border: 1px solid #bcbcbc;
+  border-radius: 5px;
+  padding: 4px 10px 4px 40px;
+  outline: none;
 }

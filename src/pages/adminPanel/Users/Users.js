@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TitleHead from "../../../components/TitleHead/TitleHead";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 // modules
 import { convertToFastStructure } from "./../../../utils";
+import SearchInput from "../../../components/SearchInput/SearchInput";
 
 export default function Users() {
+  // states => 
+  const [filteredData , setFilteredData] = useState([])
   // SELECTOR =>
   const users = useSelector((state) => state.users);
   const exams = useSelector((state) => state.exams);
@@ -52,9 +55,21 @@ export default function Users() {
       }
     });
   };
+
+
+  useEffect(() => {
+    setFilteredData(users)
+  } , [users])
   return (
     <>
-      <TitleHead title="لیست کاربران" />
+      <div className="d-flex justify-content-between align-items-center">
+        <TitleHead title="لیست کاربران" />
+        <SearchInput
+          mainData={users}
+          searchTarget="username"
+          setFilteredDate={setFilteredData}
+        />
+      </div>
       <div className="row mt-5">
         <div className="table-responsive">
           <table className="table">
@@ -70,7 +85,7 @@ export default function Users() {
               </tr>
             </thead>
             <tbody>
-              {users.map((user, index) => (
+              {filteredData.map((user, index) => (
                 <tr key={user.id}>
                   <td>{index + 1}</td>
                   <td>{user.username}</td>

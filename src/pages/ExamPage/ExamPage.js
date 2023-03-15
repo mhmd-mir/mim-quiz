@@ -17,18 +17,20 @@ export default function ExamPage() {
   // redirect
   const navigate = useNavigate();
   // Selectors =>
- 
+
   const userInfo = useSelector((state) =>
     state.users.find((user) => user.id === +localStorage.getItem("userId"))
   );
   const examInfo = useSelector((state) =>
     state.exams.find((exam) => exam.id === +params.examId)
   );
-  const log = useSelector(state => state.logs.find(log => {
-    return log.examId === +params.examId && log.userId === userInfo.id
-  }))
-  // dispatch 
-  const reduxDispatch = useDispatch()
+  const log = useSelector((state) =>
+    state.logs.find((log) => {
+      return log.examId === +params.examId && log.userId === userInfo.id;
+    })
+  );
+  // dispatch
+  const reduxDispatch = useDispatch();
   // useEffect =>
   useEffect(() => {
     (async function () {
@@ -63,50 +65,52 @@ export default function ExamPage() {
     }
   }, [userInfo]);
   useEffect(() => {
-    if(log){
+    if (log) {
       Swal.fire({
-        title : 'عدم دسترسی به ازمون' ,
-        icon : 'error' , 
-        text : 'شما قبلا در این ازمون شرکت کرده اید'
+        title: "عدم دسترسی به ازمون",
+        icon: "error",
+        text: "شما قبلا در این ازمون شرکت کرده اید",
       }).then(() => {
-        navigate('/my-account')
-      })
+        navigate("/my-account");
+      });
     }
-  } , [log])
-  // methods => 
+  }, [log]);
+  // methods =>
   const exportAnswers = (questions) => {
-    const answers = {} 
-    questions.forEach(question => {
-      answers[question.id] = question.answer
-    })
-    return answers
-  }
-
+    const answers = {};
+    questions.forEach((question) => {
+      answers[question.id] = question.answer;
+    });
+    return answers;
+  };
 
   // handlers =>
 
   const finishExamHandler = () => {
     const examLog = {
-      title : examInfo?.title ,
-      userId : userInfo.id , 
-      examId : examInfo.id , 
-      userAnswers : inputsDetails , 
-      examAnswers : exportAnswers(questions) ,
-      questions
-    }
-    
+      title: examInfo?.title,
+      userId: userInfo.id,
+      examId: examInfo.id,
+      userAnswers: inputsDetails,
+      examAnswers: exportAnswers(questions),
+      questions,
+    };
+
     reduxDispatch({
-      type : 'API_REQUEST' , 
-      payload : {
-        method : 'POST' , 
-        table : 'logs' , 
-        body : examLog ,
-        onSuccessType : 'logs/ADD_LOG' ,
-        onSuccessCallback : () => {
-          navigate('/my-account')
-        }
-      }
-    })
+      type: "API_REQUEST",
+      payload: {
+        method: "POST",
+        table: "logs",
+        body: examLog,
+        onSuccessType: "logs/ADD_LOG",
+        onSuccessCallback: () => {
+          Swal.fire({
+            title: "ازمون با موفقیت ثبت شد",
+            icon: "success",
+          }).then(() => {navigate("/my-account")});
+        },
+      },
+    });
   };
 
   return (
@@ -131,7 +135,10 @@ export default function ExamPage() {
                 onExpireHandler={() => finishExamHandler}
               />
             </div>
-            <button className="btn btn-success mt-2 w-100" onClick={finishExamHandler}>
+            <button
+              className="btn btn-success mt-2 w-100"
+              onClick={finishExamHandler}
+            >
               اتمام ازمون
             </button>
           </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import {React , useState , useEffect} from "react";
 import "./Questions.css";
 
 //COMPONENTS =>
@@ -10,8 +10,11 @@ import Swal from "sweetalert2";
 
 // modules =>
 import { convertToFastStructure } from "../../../utils";
+import SearchInput from "../../../components/SearchInput/SearchInput";
 
 export default function Questions() {
+  // state => 
+  const [filteredQuestions, setFilteredQuestions] = useState([]);
   // selectors =>
   const questions = useSelector((state) => state.questions);
   const isLoading = useSelector((state) => state.loading);
@@ -61,10 +64,25 @@ export default function Questions() {
       confirmButtonText: "تایید",
     });
   };
+
+
+
+
+  // useEffect =>
+  useEffect(() => {
+    setFilteredQuestions(questions);
+  }, [questions]);
   return (
     <>
       {isLoading && <Loader />}
-      <TitleHead title="لیست سوالات" />
+      <div className="d-flex justify-content-between align-items-center">
+        <TitleHead title="لیست سوالات " />
+        <SearchInput
+          mainData={questions}
+          searchTarget="title"
+          setFilteredDate={setFilteredQuestions}
+        />
+      </div>
       <div className="row mt-5">
         <div className="table-responsive">
           <table className="table">
@@ -79,7 +97,7 @@ export default function Questions() {
               </tr>
             </thead>
             <tbody>
-              {questions.map((question, index) => (
+              {filteredQuestions.map((question, index) => (
                 <tr key={question.id}>
                   <td>{index + 1}</td>
                   <td>{question.title}</td>

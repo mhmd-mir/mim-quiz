@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 import supabase from "../../supabase";
 
 const API = (store) => (next) => async (action) => {
@@ -49,6 +50,13 @@ const API = (store) => (next) => async (action) => {
       
         //end loading
         store.dispatch({ type: "loader/LOADING_OFF" });
+      }else{
+        Swal.fire({
+          icon : 'error' , 
+          title : 'عملیات با خطا مواجه شد' ,
+          text : error.message
+        })
+        store.dispatch({ type: "loader/LOADING_OFF" });
       }
 
       break;
@@ -74,6 +82,13 @@ const API = (store) => (next) => async (action) => {
 
         //end loading
         store.dispatch({ type: "loader/LOADING_OFF" });
+      }else{
+        Swal.fire({
+          icon : 'error' , 
+          title : 'عملیات با خطا مواجه شد' ,
+          text : error.message
+        })
+        store.dispatch({ type: "loader/LOADING_OFF" });
       }
 
       break;
@@ -92,6 +107,13 @@ const API = (store) => (next) => async (action) => {
           },
         });
         
+        store.dispatch({ type: "loader/LOADING_OFF" });
+      }else{
+        Swal.fire({
+          icon : 'error' , 
+          title : 'عملیات با خطا مواجه شد' ,
+          text : error.message
+        })
         store.dispatch({ type: "loader/LOADING_OFF" });
       }
       break;
