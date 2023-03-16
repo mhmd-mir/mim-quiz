@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Navigate, redirect, useNavigate, useParams } from "react-router-dom";
 import TitleHead from "../../../components/TitleHead/TitleHead";
 import "./LogPage.css";
 export default function LogPage() {
@@ -8,12 +8,14 @@ export default function LogPage() {
   const [score, setScore] = useState(null);
   const [scorePercent, setScorePercent] = useState(null);
   const params = useParams();
+  // redirect 
+  const navigate = useNavigate()
   // selectors =>
   const logInfo = useSelector((state) =>
     state.logs.find((log) => log.id === +params.logId)
   );
   const userInfo = useSelector((state) =>
-    state.users.find((user) => user?.id === logInfo.userId)
+    state.users.find((user) => user?.id === logInfo?.userId)
   );
     // methods => 
     const calculateScore = (userAnswers , examAnswers) => {
@@ -30,6 +32,12 @@ export default function LogPage() {
 
   //useEffect => 
   useEffect(() => {
+    if(logInfo?.userId){
+      if(logInfo?.userId !== +localStorage.getItem('userId')){
+        navigate('/')
+        return
+      }
+    }
     const score = calculateScore(logInfo?.userAnswers , logInfo?.examAnswers)
     setScore(score)
     const scorePercent = (score / Object.keys(logInfo?.examAnswers ?? {})?.length) * 100
