@@ -40,7 +40,7 @@ export default function UserLogs() {
 
       <div className="row mt-5 rtl">
         {userLogs.map((userLog) => (
-          <div className="col-lg-3">
+          <div className="col-lg-3 mt-3">
             <LogBox {...userLog}/>
           </div>
         ))}

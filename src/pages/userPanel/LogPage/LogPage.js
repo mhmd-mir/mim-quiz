@@ -32,7 +32,7 @@ export default function LogPage() {
   useEffect(() => {
     const score = calculateScore(logInfo?.userAnswers , logInfo?.examAnswers)
     setScore(score)
-    const scorePercent = (score / Object.keys(logInfo?.examAnswers).length) * 100
+    const scorePercent = (score / Object.keys(logInfo?.examAnswers ?? {})?.length) * 100
     setScorePercent(scorePercent)
   }, [logInfo]);
   return (

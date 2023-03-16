@@ -57,9 +57,6 @@ export default function Sidebar() {
             <li className={`${activeRoute === 'logs' ? 'active_bg' : ''}`}>
                 <Link to="logs" onClick={() => setActiveRoute('logs')}>کارنامه ها</Link>
             </li>
-            <li className={`${activeRoute === 'settings' ? 'active_bg' : ''}`}>
-                <Link to="settings" onClick={() => setActiveRoute('settings')}>تنظمیات</Link>
-            </li>
             <li onClick={logOutHandler}>
                 <Link to="">خروج</Link>
             </li>
