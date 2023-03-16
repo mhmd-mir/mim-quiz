@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.695b8306.css",
+    "main.js": "/static/js/main.47fc5172.js",
+    "static/media/Vazirmatn-Regular.ttf": "/static/media/Vazirmatn-Regular.f08bc22d4f5bb01fb82f.ttf",
+    "index.html": "/index.html",
+    "main.695b8306.css.map": "/static/css/main.695b8306.css.map",
+    "main.47fc5172.js.map": "/static/js/main.47fc5172.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.695b8306.css",
+    "static/js/main.47fc5172.js"
+  ]
+}

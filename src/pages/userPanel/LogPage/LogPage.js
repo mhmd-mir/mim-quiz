@@ -8,8 +8,8 @@ export default function LogPage() {
   const [score, setScore] = useState(null);
   const [scorePercent, setScorePercent] = useState(null);
   const params = useParams();
-  // redirect 
-  const navigate = useNavigate()
+  // redirect
+  const navigate = useNavigate();
   // selectors =>
   const logInfo = useSelector((state) =>
     state.logs.find((log) => log.id === +params.logId)
@@ -17,31 +17,36 @@ export default function LogPage() {
   const userInfo = useSelector((state) =>
     state.users.find((user) => user?.id === logInfo?.userId)
   );
-    // methods => 
-    const calculateScore = (userAnswers , examAnswers) => {
-        let score = 0 ;
-        for (const questionId in examAnswers) {
-            if (Object.hasOwnProperty.call(examAnswers, questionId)) {
-                if(+userAnswers[questionId] === +examAnswers[questionId]){
-                    ++score
-                }
-            }
-        }
-        return score
-    }
 
-  //useEffect => 
-  useEffect(() => {
-    if(logInfo?.userId){
-      if(logInfo?.userId !== +localStorage.getItem('userId')){
-        navigate('/')
-        return
+  const currentUser = useSelector((state) =>
+    state.users.find((user) => user?.id === +localStorage.getItem("userId"))
+  );
+  // methods =>
+  const calculateScore = (userAnswers, examAnswers) => {
+    let score = 0;
+    for (const questionId in examAnswers) {
+      if (Object.hasOwnProperty.call(examAnswers, questionId)) {
+        if (+userAnswers[questionId] === +examAnswers[questionId]) {
+          ++score;
+        }
       }
     }
-    const score = calculateScore(logInfo?.userAnswers , logInfo?.examAnswers)
-    setScore(score)
-    const scorePercent = (score / Object.keys(logInfo?.examAnswers ?? {})?.length) * 100
-    setScorePercent(scorePercent)
+    return score;
+  };
+
+  //useEffect =>
+  useEffect(() => {
+    if (logInfo?.userId) {
+      if (logInfo?.userId !== +localStorage.getItem("userId") && currentUser?.role !== 'ADMIN') {
+        navigate("/");
+        return;
+      }
+    }
+    const score = calculateScore(logInfo?.userAnswers, logInfo?.examAnswers);
+    setScore(score);
+    const scorePercent =
+      (score / Object.keys(logInfo?.examAnswers ?? {})?.length) * 100;
+    setScorePercent(scorePercent);
   }, [logInfo]);
   return (
     <>
@@ -76,7 +81,7 @@ export default function LogPage() {
       </div>
       <TitleHead title="سوالات" />
       <div className="row">
-        {logInfo?.questions?.map((question , index) => (
+        {logInfo?.questions?.map((question, index) => (
           <>
             <div className="question rtl my-3">
               <div>
@@ -93,10 +98,20 @@ export default function LogPage() {
                         <input
                           type="radio"
                           disabled
-                          checked={+logInfo?.userAnswers[question?.id] === option?.id}
+                          checked={
+                            +logInfo?.userAnswers[question?.id] === option?.id
+                          }
                         />
                         {console.log(logInfo?.userAnswers[question?.id])}
-                        <span className={`mx-1 ${option.id === question.answer ? `text-success bold` : `text-danger`}`}>{option.title}</span>
+                        <span
+                          className={`mx-1 ${
+                            option.id === question.answer
+                              ? `text-success bold`
+                              : `text-danger`
+                          }`}
+                        >
+                          {option.title}
+                        </span>
                       </div>
                     ))}
                   </div>
